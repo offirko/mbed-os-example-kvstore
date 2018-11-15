@@ -15,9 +15,11 @@
 * limitations under the License.
 */
 
+#include "mbed.h"
+#include <stdio.h>
+#include "KVStore.h"
 #include "kvstore_global_api.h"
 
-using namespace utest::v1;
 using namespace mbed;
 
 #define EXAMPLE_KV_VALUE_LENGTH 64
@@ -42,20 +44,18 @@ int main()
     res = kv_reset("/kv/");
     printf("kv_reset -> %d\n", res);
 
-    printf("kv_get from empty kvstore\n");
+    printf("kv_get from empty kvstore - should fail!\n");
     memset(kv_value_out, 0, EXAMPLE_KV_VALUE_LENGTH);
     memset(kv_key_out, 0, EXAMPLE_KV_KEY_LENGTH);
     res = kv_get(kv_key_in, kv_value_out, EXAMPLE_KV_VALUE_LENGTH, &actual_size);
     printf("kv_get -> %d\n", res);
-    printf("kv_get key: %s\n", kv_key_in);
-    printf("kv_get value: %s\n", kv_value_out);
 
     printf("kv_set first key\n");
     res = kv_set(kv_key_in, kv_value_in, strlen(kv_value_in), 0);
     printf("kv_set -> %d\n", res);
 
     printf("kv_set second key with write-once flag\n");
-    res = kv_set("/kv/wo_key", "wo_value", strlen("wo_value"), mbed::KVStore::WRITE_ONCE_FLAG);
+    res = kv_set("/kv/wo_key", "wo_value", strlen("wo_value"), KVStore::WRITE_ONCE_FLAG);
     printf("kv_set -> %d\n", res);
 
     printf("kv_get first key\n");
@@ -76,7 +76,7 @@ int main()
     memset(kv_key_out, 0, EXAMPLE_KV_KEY_LENGTH);
     while (kv_iterator_next(kvstore_it, kv_key_out, EXAMPLE_KV_KEY_LENGTH) != MBED_ERROR_ITEM_NOT_FOUND) {
         i_ind++;
-        printf("%d) %s\n", i_ind, kv_key_in);
+        printf("%d) %s\n", i_ind, kv_key_out);
         memset(kv_key_out, 0, EXAMPLE_KV_KEY_LENGTH);
     }
     res = kv_iterator_close(kvstore_it);
@@ -85,12 +85,12 @@ int main()
     res = kv_remove(kv_key_in);
     printf("kv_remove -> %d\n", res);
 
-    printf("kv_get first key after removing it\n");
+    printf("kv_get first key after removing it - should fail!\n");
     memset(kv_value_out, 0, EXAMPLE_KV_VALUE_LENGTH);
     res = kv_get(kv_key_in, kv_value_out, EXAMPLE_KV_VALUE_LENGTH, &actual_size);
     printf("kv_get -> %d\n", res);
 
-    printf("kv_remove fail to remove second key - write-once\n");
+    printf("kv_remove write-once file - should fail!\n");
     res = kv_remove("/kv/wo_key");
     printf("kv_remove -> %d\n", res);
 
@@ -104,7 +104,7 @@ int main()
     res = kv_reset("/kv/");
     printf("kv_reset -> %d\n", res);
 
-    printf("kv_get second key after reset\n");
+    printf("kv_get second key after reset - should fail!\n");
     memset(kv_value_out, 0, EXAMPLE_KV_VALUE_LENGTH);
     res = kv_get("/kv/wo_key", kv_value_out, EXAMPLE_KV_VALUE_LENGTH, &actual_size);
     printf("kv_get -> %d\n", res);
