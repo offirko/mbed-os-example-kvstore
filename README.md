@@ -1,4 +1,4 @@
-# Getting started with the Mbed OS block device API
+# Getting started with the Mbed OS Key Value Store API
 
 This example demonstrates how to use the Mbed OS Key Value Store (kvstore) API.
 
