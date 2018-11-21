@@ -75,12 +75,13 @@ void kv_store_global_api_example()
     /* Now that you know the data value size of this key,
      * allocate a buffer with matching size and get the value data */
     printf("kv_get first key\n");
-    char *kv_first_value_out = new char[info.size];
-    memset(kv_first_value_out, 0, info.size);
+    char *kv_first_value_out = new char[info.size+1];
+    memset(kv_first_value_out, 0, info.size+1);
     res = kv_get(kv_key_in, kv_first_value_out, info.size, &actual_size);
     printf("kv_get -> %d\n", err_code(res));
     printf("kv_get key: %s\n", kv_key_in);
     printf("kv_get value: %s\n", kv_first_value_out);
+    delete[] kv_first_value_out;
 
     /* Lets set some more 'Dummy' and 'Real' KV pairs */
     /* Set 'Dummy' Key2 */
@@ -89,7 +90,7 @@ void kv_store_global_api_example()
     printf("kv_set -> %d\n", err_code(res));
 
     /* Set an authenticated-encrypted 'Dummy' key with Replay protection */
-    printf("kv_set third key with Confidentiality, Integrity and Replay Protection flags seg\n");
+    printf("kv_set third key with Confidentiality, Integrity and Replay Protection flags\n");
     res = kv_set("/kv/dummy_auth_enc_key", "auth_enc_value", strlen("auth_enc_value"),
     		KV_REQUIRE_CONFIDENTIALITY_FLAG|KV_REQUIRE_INTEGRITY_FLAG|KV_REQUIRE_REPLAY_PROTECTION_FLAG);
     printf("kv_set -> %d\n", err_code(res));

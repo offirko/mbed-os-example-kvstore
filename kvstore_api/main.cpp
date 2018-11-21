@@ -100,8 +100,6 @@ void kv_store_api_example(KVStore *kv_store, const char *kvstore_str)
 
     int i_ind = 0;
 
-    printf("--- Mbed OS KVStore static API example ---\n");
-
     int res = MBED_ERROR_NOT_READY;
 
     /* Start by Init and Reset KV Storage */
@@ -128,12 +126,13 @@ void kv_store_api_example(KVStore *kv_store, const char *kvstore_str)
     /* Now that you know the data value size of this key,
      * allocate a buffer with matching size and get the value data */
     printf("%s_get first key\n", kvstore_str);
-    char *kv_first_value_out = new char[info.size];
-    memset(kv_first_value_out, 0, info.size);
+    char *kv_first_value_out = new char[info.size+1];
+    memset(kv_first_value_out, 0, info.size+1);
     res = kv_store->get(kv_key_in, kv_first_value_out, info.size, &actual_size);
     printf("%s_get -> %d\n", kvstore_str, err_code(res));
     printf("%s_get key: %s\n", kvstore_str, kv_key_in);
     printf("%s_get value: %s\n", kvstore_str, kv_first_value_out);
+    delete[] kv_first_value_out;
 
     /* Lets set some more 'Dummy' and 'Real' KV pairs */
     /* Set 'Dummy' Key2 */
