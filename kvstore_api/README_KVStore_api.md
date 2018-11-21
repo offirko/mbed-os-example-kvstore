@@ -111,12 +111,12 @@ tdb_set -> 0
 tdb_set Set 'Real' Key 2 with flag write-once
 tdb_set -> 0
 Removing 'Dummy' Keys
-1) Removing dummy_key2
-2) Removing dummy_auth_enc_key
+1) Removing dummy_key1
+2) Removing dummy_key2
+3) Removing dummy_auth_enc_key
 Remaining with 'Real' Keys:
 1) real_wo_key
 2) real_key1
-3) dummy_key1
 tdb_remove write-once file - should fail!
 tdb_remove -> 274
 tdb_reset format kvstore (including write-once)
@@ -185,12 +185,12 @@ secure_set -> 0
 secure_set Set 'Real' Key 2 with flag write-once
 secure_set -> 0
 Removing 'Dummy' Keys
-1) Removing dummy_key2
-2) Removing dummy_auth_enc_key
+1) Removing dummy_key1
+2) Removing dummy_key2
+3) Removing dummy_auth_enc_key
 Remaining with 'Real' Keys:
 1) real_wo_key
 2) real_key1
-3) dummy_key1
 secure_remove write-once file - should fail!
 secure_remove -> 274
 secure_reset format kvstore (including write-once)

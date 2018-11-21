@@ -103,12 +103,12 @@ kv_set -> 0
 kv_set Set 'Real' Key 2 with flag write-once
 kv_set -> 0
 Removing 'Dummy' Keys
-1) Removing dummy_key2
-2) Removing dummy_auth_enc_key
+1) Removing dummy_key1
+2) Removing dummy_key2
+3) Removing dummy_auth_enc_key
 Remaining with 'Real' Keys:
 1) real_wo_key
 2) real_key1
-3) dummy_key1
 kv_remove write-once file - should fail!
 kv_remove -> 274
 kv_reset format kvstore (including write-once)
