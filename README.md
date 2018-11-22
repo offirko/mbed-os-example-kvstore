@@ -101,6 +101,10 @@ Image: ./BUILD/K82F/GCC_ARM/kvstore.bin
    example, `screen /dev/ttyACM0`.
 
 **Note:** The default serial port baud rate is 115200 bit/s.
+          You may open serial term with:  
+```
+mbed sterm -b 115200 -r
+```
 
 Expected output:
 
