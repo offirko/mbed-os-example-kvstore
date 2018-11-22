@@ -7,7 +7,7 @@ Mbed-OS provides several KVStore implementation options, that can be optimized t
 the specific application requirements and target hardware:
 - TDBStore - Default implementation of the KVStore API. It provides static wear-leveling and quick access for when you have a small number of KV pairs.
 - FileSystemStore - Class that provides a key-value store API on top of a POSIX-like file system API.
-- SecureStore - Class that provides encryption, authentication and rollback protection on top of the KVStore API. It requires two KVStore implementations, one that provides the storage for the KV pairs and one that provides storage for the CMACs that protect KV pairs stored in the KVStore.
+- SecureStore - Class that provides encryption, authentication and rollback protection on top of the KVStore API. It requires two KVStore implementations, one that provides the storage for the KV pairs and one providing storage for the CMACs that protect KV pairs stored in the KVStore.
 
 KVStore Global APIs use Mbed-OS [KVStore configuration](#kvstore-configuration) json file to define the selected KVStore implementation option of the above.
 
@@ -100,7 +100,7 @@ Image: ./BUILD/K82F/GCC_ARM/kvstore.bin
 1. Open the UART of the board in your favorite UART viewing program. For
    example, `screen /dev/ttyACM0`.
 
-**Note:** The default serial port baud rate is 9600 bit/s.
+**Note:** The default serial port baud rate is 115200 bit/s.
 
 Expected output:
 
